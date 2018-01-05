@@ -1,0 +1,2 @@
+:set -fshow-loaded-modules
+:set -fdefer-type-errors

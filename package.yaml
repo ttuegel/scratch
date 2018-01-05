@@ -4,7 +4,8 @@ version: "0"
 dependencies:
   - base >= 4.7 && < 5
   - colour >= 2.3
-  - diagrams >= 1.4
+  - diagrams-lib >= 1.4
+  - diagrams-svg >= 1.4
 
 library:
   exposed-modules:
