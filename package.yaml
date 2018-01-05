@@ -9,3 +9,4 @@ dependencies:
 library:
   exposed-modules:
     - Base16
+    - LazyPattern

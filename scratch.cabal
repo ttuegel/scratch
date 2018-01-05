@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: e5678deda0165db6ee831f670c37fb60304c6c4f55cb809c1c8109c09293eafc
+-- hash: c3580919f51b97b5a8ff6ee3c5f0436f15c3e06ef014b0af57a3741d59bb500b
 
 name:           scratch
 version:        0
@@ -12,6 +12,7 @@ cabal-version:  >= 1.10
 library
   exposed-modules:
       Base16
+      LazyPattern
   other-modules:
       Paths_scratch
   build-depends:
