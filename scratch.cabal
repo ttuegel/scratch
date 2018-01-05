@@ -1,0 +1,21 @@
+-- This file has been generated from package.yaml by hpack version 0.21.2.
+--
+-- see: https://github.com/sol/hpack
+--
+-- hash: e5678deda0165db6ee831f670c37fb60304c6c4f55cb809c1c8109c09293eafc
+
+name:           scratch
+version:        0
+build-type:     Simple
+cabal-version:  >= 1.10
+
+library
+  exposed-modules:
+      Base16
+  other-modules:
+      Paths_scratch
+  build-depends:
+      base >=4.7 && <5
+    , colour >=2.3
+    , diagrams >=1.4
+  default-language: Haskell2010
