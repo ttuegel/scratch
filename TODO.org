@@ -1,0 +1,6 @@
+
+* Reading
+
+- http://blog.functorial.com/posts/2016-08-07-Comonads-As-Spaces.html
+- http://blog.functorial.com/posts/2016-08-08-Comonad-And-Day-Convolution.html
+- http://blog.functorial.com/posts/2017-10-28-Comonads-For-Optionality.html
