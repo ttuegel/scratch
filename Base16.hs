@@ -12,6 +12,9 @@ import Data.Colour.SRGB
 import Diagrams.Prelude
 import Diagrams.Backend.SVG
 
+import Graphics.Rendering.Chart hiding (translate)
+import Graphics.Rendering.Chart.Backend.Diagrams
+
 
 chalk :: [Colour Double]
 chalk =
@@ -60,17 +63,45 @@ contrastLine =
     color c = fillColor c . lineColor c
 
 
-contrastGrid :: Diagram B
-contrastGrid =
-    mconcat contrastPairs
+contrastGrid :: [Colour Double] -> Diagram B
+contrastGrid theme =
+    mconcat rows
   where
-    contrastPairs =
+    colored c = fillColor c . lineColor c
+    rows =
       do
-        (col, color1, color2s) <- zip3 [0..] chalk (tails chalk)
+        (row, color1, color2s) <- zip3 [0..] theme (tails theme)
         let
-          colored c = fillColor c . lineColor c
-          dia1 = translateX (-1 / sqrt 2) (colored color1 unitCircle)
-        (row, color2) <- zip [0..] color2s
+          dia1 = colored color1 (square 2)
+        [ translate (V2 (3 * row) (-3 * row)) (mconcat (cols dia1 color2s)) ]
+    cols dia1 color2s =
+      do
+        (col, color2) <- zip [0..] color2s
+        let dia2 = colored color2 (circle 0.5)
+        [ translateX (3 * col) (dia2 <> dia1) ]
+
+
+lightnessPlot :: [Colour Double] -> Layout Int Double
+lightnessPlot theme =
+    def
+    & layout_title .~ "Perceived Lightness"
+    & layout_plots .~ [ plotBars bars ]
+  where
+    bars =
+      def
+      & plot_bars_style .~ BarsStacked
+      & plot_bars_item_styles .~ styles
+      & plot_bars_values .~ values
+
+    styles =
+        map (\c -> (FillStyleSolid (opaque c), Just def)) theme
+
+    values =
+      do
+        (n, color) <- zip [0..] theme
         let
-          dia2 = translateX (1 / sqrt 2) (colored color2 unitCircle)
-        [translate (V2 (4 * col) (4 * (col + row))) (dia1 <> dia2)]
+          ys =
+              replicate n 0
+              ++ [ lightness d65 color ]
+              ++ replicate (length theme - n - 1) 0
+        [ (n, ys) ]

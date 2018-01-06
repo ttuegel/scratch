@@ -3,6 +3,8 @@ version: "0"
 
 dependencies:
   - base >= 4.7 && < 5
+  - Chart >= 1.8
+  - Chart-diagrams >= 1.8
   - colour >= 2.3
   - diagrams-lib >= 1.4
   - diagrams-svg >= 1.4
