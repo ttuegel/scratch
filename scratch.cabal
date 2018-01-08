@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 101c6d24b9b21d71f96db5cdf20fad3d77c9d61cacbdf0b6f5372dda2ec52496
+-- hash: 0a1ff40d60670d50b39ee2b1658828ea09fde08fb05a8e92f42a161c094e6eb1
 
 name:           scratch
 version:        0
@@ -22,4 +22,5 @@ library
     , colour >=2.3
     , diagrams-lib >=1.4
     , diagrams-svg >=1.4
+    , lens >=4.15
   default-language: Haskell2010

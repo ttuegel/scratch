@@ -8,6 +8,7 @@ dependencies:
   - colour >= 2.3
   - diagrams-lib >= 1.4
   - diagrams-svg >= 1.4
+  - lens >= 4.15
 
 library:
   exposed-modules:
