@@ -6,11 +6,14 @@ dependencies:
   - Chart >= 1.8
   - Chart-diagrams >= 1.8
   - colour >= 2.3
+  - containers
   - diagrams-lib >= 1.4
   - diagrams-svg >= 1.4
   - lens >= 4.15
+  - recursion-schemes
 
 library:
   exposed-modules:
     - Base16
     - LazyPattern
+    - Synthetic
