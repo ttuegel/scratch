@@ -6,10 +6,14 @@
 
 module Synthetic where
 
+import Control.Comonad
 import Data.Foldable
 import Data.Functor.Const
 import GHC.Generics
 
+import Control.Comonad.Cofree (Cofree)
+import Control.Comonad.Trans.Cofree (CofreeF (..))
+import Data.Functor.Foldable (Fix)
 import Data.Set (Set)
 
 import qualified Data.Set as Set
@@ -39,6 +43,16 @@ instance
   synthetic (L1 lsyn) = synthetic lsyn
   synthetic (R1 rsyn) = synthetic rsyn
 
+{- | A wrapper on which to dispatch Generic1-derived instances.
+
+We would rather not provide a default Generic1 implementation of synthetic
+because it is valid only for "mere" aggregation types, and that would set a
+dangerous trap.
+
+Instead, we will provide a Generic1 instance for Generically1, which we use
+with DerivingVia.
+
+ -}
 newtype Generically1 functor a =
   Generically1 { unGenerically1 :: functor a }
   deriving Functor
@@ -88,3 +102,14 @@ data LamF child
   deriving (Functor, Foldable, Traversable)
   deriving (Generic, Generic1)
   deriving (Synthetic FreeVars) via (Generically1 LamF)
+
+-- | Fold up an expression to find its free variables.
+freeVars :: Fix LamF -> FreeVars
+freeVars = Recursive.fold synthetic
+
+-- | Annotate an expression so its free variables are always handy.
+annotate :: Fix LamF -> Cofree LamF FreeVars
+annotate lam = Recursive.embed (syn :< lamF)
+  where
+    lamF = annotate <$> Recursive.project lam
+    syn = synthetic (extract <$> lamF)

@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: b59e903894057867a9780c018b0852a273f453e7a0ca5ae846173fc1d41c2bc0
+-- hash: d34b4508e62b31368e2cffa74439b5156badac5e020f358a37509a17e870f100
 
 name:           scratch
 version:        0
@@ -22,9 +22,11 @@ library
     , Chart-diagrams >=1.8
     , base >=4.7 && <5
     , colour >=2.3
+    , comonad
     , containers
     , diagrams-lib >=1.4
     , diagrams-svg >=1.4
+    , free
     , lens >=4.15
     , recursion-schemes
   default-language: Haskell2010

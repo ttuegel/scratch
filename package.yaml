@@ -11,6 +11,8 @@ dependencies:
   - diagrams-svg >= 1.4
   - lens >= 4.15
   - recursion-schemes
+  - free
+  - comonad
 
 library:
   exposed-modules:
